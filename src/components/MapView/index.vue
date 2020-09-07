@@ -8,7 +8,9 @@
             <el-card shadow="hover">
                 <template v-slot:header>
                     <div class="title">用户月同比增长</div>
-                    <div class="chart-wapper"></div>
+                    <div class="chart-wapper">
+                      <liquid-fill />
+                    </div>
                 </template>
             </el-card>
             <el-card shadow="hover">
@@ -23,9 +25,11 @@
 </template>
 <script>
 import BmapScatter from "../BmapScatter";
+import liquidFill from "../liquidFill"
 export default {
   components: {
     BmapScatter,
+    liquidFill
   },
 };
 </script>
