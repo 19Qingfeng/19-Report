@@ -14,7 +14,7 @@
 }
 </style>
 <script>
-import "echarts-wordCloud";
+import "../../../node_modules/echarts-wordcloud";
 export default {
   name: "WordCloud",
   data() {

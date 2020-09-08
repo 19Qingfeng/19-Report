@@ -9,7 +9,7 @@
                 <template v-slot:header>
                     <div class="title">用户月同比增长</div>
                     <div class="chart-wapper">
-                      <liquid-fill />
+                        <liquid-fill />
                     </div>
                 </template>
             </el-card>
@@ -17,7 +17,7 @@
                 <template v-slot:header>
                     <div class="title">用户月同比增长</div>
                     <div class="chart-wapper">
-                      <word-cloud />
+                        <word-cloud />
                     </div>
                 </template>
             </el-card>
@@ -27,14 +27,20 @@
 </template>
 <script>
 import BmapScatter from "../BmapScatter";
-import liquidFill from "../liquidFill"
-import wordCloud from "../wordCloud"
+import liquidFill from "../liquidFill";
+import wordCloud from "../wordCloud";
+import { wordCloudApi, screenData, screenMap } from "../../api";
 export default {
   components: {
     BmapScatter,
     liquidFill,
-    wordCloud
+    wordCloud,
   },
+  created() {
+    wordCloudApi()
+    screenData()
+    screenMap()
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -64,8 +70,8 @@ export default {
     padding: 0 0 0 20px;
   }
   .chart-wapper {
-      width:100%;
-      height:190px;
+    width: 100%;
+    height: 190px;
   }
 }
 </style>
