@@ -45,6 +45,7 @@ export default {
               shadowColor: "#fff",
             },
             outline: {
+              // 外部线和内部的距离
               borderDistance: 0,
               itemStyle: {
                 color: "none",
@@ -55,7 +56,7 @@ export default {
               },
             },
             label: {
-              // label和波纹重叠时
+              // label和波纹重叠时颜色
               insideColor: "red",
               textStyle: {
                 fontSize: 36,
