@@ -29,18 +29,12 @@
 import BmapScatter from "../BmapScatter";
 import liquidFill from "../liquidFill";
 import wordCloud from "../wordCloud";
-import { wordCloudApi, screenData, screenMap } from "../../api";
 export default {
   components: {
     BmapScatter,
     liquidFill,
     wordCloud,
   },
-  created() {
-    wordCloudApi()
-    screenData()
-    screenMap()
-  }
 };
 </script>
 <style lang="scss" scoped>

@@ -10,17 +10,55 @@
 import TopView from "../../components/TopView";
 import SalesView from "../../components/SalesView";
 import BottomView from "../../components/BottomView";
-import MapView from "../../components/MapView"
+import MapView from "../../components/MapView";
+import { wordCloudApi, screenData, screenMap } from "../../api";
+
 export default {
   name: "Home",
+  provide() {
+    return {
+      getReportData: this.getReportData,
+      getWordCloud: this.getWordCloud,
+      getMapData: this.getMapData,
+    };
+  },
   components: {
     TopView,
     SalesView,
     BottomView,
-    MapView
+    MapView,
   },
   data() {
     return {};
+  },
+  data() {
+    return {
+      reportData: null,
+      wordCloud: null,
+      mapdata: null,
+    };
+  },
+  methods: {
+    getReportData() {
+      return this.reportData;
+    },
+    getWordCloud() {
+      return this.wordCloud;
+    },
+    getMapData() {
+      return this.mapdata;
+    },
+  },
+  created() {
+    wordCloudApi().then((res) => {
+      this.wordCloud = res;
+    });
+    screenData().then((res) => {
+      this.reportData = res;
+    });
+    screenMap().then((res) => {
+      this.mapdata = res;
+    });
   },
 };
 </script>

@@ -1,68 +1,75 @@
 <template>
-  <div>
-    <common-card title="累计用户数" description="1,087,503">
-      <!-- <div id="chart" style="width:100%;height:100%"></div> -->
-      <v-chart :options="getOption()" />
-      <template v-slot:footer>
-        <div class="wapper">
-          <span>日同比</span>
-          <span class="emphasis">8.73%</span>
-          <span class="increase" />
-          <span class="month">月同比</span>
-          <span class="emphasis">35.91%</span>
-          <span class="decrease" />
-        </div>
-      </template>
-    </common-card>
-  </div>
+    <div>
+        <common-card
+            title="累计用户数"
+            :description="userToday"
+        >
+            <!-- <div id="chart" style="width:100%;height:100%"></div> -->
+            <v-chart :options="getOption()" />
+            <template v-slot:footer>
+                <div class="wapper">
+                    <span>日同比</span>
+                    <span class="emphasis">{{userGrowthLastDay}}</span>
+                    <span class="increase" />
+                    <span class="month">月同比</span>
+                    <span class="emphasis">{{userGrowthLastMonth}}</span>
+                    <span class="decrease" />
+                </div>
+            </template>
+        </common-card>
+    </div>
 </template>
 <script>
 import CommonCardMixins from "../mixins/commomCard";
+import CommonDataMixins from "../mixins/commomData";
 export default {
   name: "TotalUsers",
-  mixins: [CommonCardMixins],
+  mixins: [CommonCardMixins, CommonDataMixins],
   methods: {
     getOption() {
       return {
         xAxis: {
           type: "value",
-          show: false
+          show: false,
         },
         yAxis: {
           type: "category",
-          show: false
+          show: false,
         },
         grid: {
           top: 0,
           left: 0,
           right: 0,
-          bottom: 0
+          bottom: 0,
         },
         tooltip: {},
         series: [
           {
-            name: "test1",
+            name: "上月数量",
             type: "bar",
-            data: [100],
+            data: [this.userLastMonth],
             barWidth: 15,
             stack: "bar",
             itemStyle: {
-              color: "#45c946"
-            }
+              color: "#45c946",
+            },
           },
           {
-            name: "test2",
+            name: "这月数量",
             type: "bar",
-            data: [120],
+            data: [this.userTodayOrigin],
             stack: "bar",
             itemStyle: {
-              color: "#eee"
-            }
+              color: "rgba(255,0,37,0.6)",
+            },
           },
           {
             type: "custom",
             stack: "bar",
-            data: [100],
+            data: [this.userLastMonth],
+            tooltip: {
+              show: false,
+            },
             renderItem: (params, api) => {
               const value = api.value(0); // 注意获取的是第一个纬度
               const endPoint = api.coord([value, 0]); //获取对应位置
@@ -79,13 +86,13 @@ export default {
                       y: -20, // 相对y轴偏移坐标
                       width: 10, // 图形宽
                       height: 10, // 图形高
-                      layout: "cover" // 图形比 center保持图形宽高比放大4
+                      layout: "cover", // 图形比 center保持图形宽高比放大4
                       // cover 不保持宽高比放大
                     },
                     // style样式配置
                     style: {
-                      fill: "#45c946"
-                    }
+                      fill: "#45c946",
+                    },
                   },
                   {
                     type: "path", // 使用svg矢量图标
@@ -95,22 +102,22 @@ export default {
                       y: 10, // 相对y轴偏移坐标
                       width: 10, // 图形宽
                       height: 10, // 图形高
-                      layout: "cover" // 图形比 center保持图形宽高比放大9
+                      layout: "cover", // 图形比 center保持图形宽高比放大9
                     },
                     // style样式配置
                     style: {
-                      fill: "#45c946"
-                    }
-                  }
-                ]
+                      fill: "#45c946",
+                    },
+                  },
+                ],
               };
-            }
-          }
-        ]
+            },
+          },
+        ],
       };
-    }
+    },
   },
-  mounted() {}
+  mounted() {},
 };
 </script>
 <style lang="scss" scoped>
