@@ -81,7 +81,26 @@ export default {
         },
         userLastMonth() {
             return wapperOriginNumber(this.reportData, 'userLastMonth')
+        },
+        orderFullYear() {
+            return wapperArray(this.reportData, 'orderFullYear')
+        },
+        orderFullYearAxis() {
+            return wapperArray(this.reportData, 'orderFullYearAxis')
+        },
+        orderRank() {
+            return wapperArray(this.reportData, 'orderRank')
+        },
+        userFullYear() {
+            return wapperArray(this.reportData, 'userFullYear')
+        },
+        userFullYearAxis() {
+            return wapperArray(this.reportData, 'userFullYearAxis')
+        },
+        userRank() {
+            return wapperArray(this.reportData, 'userRank')
         }
+
         // 未完 继续补充
     },
 }
