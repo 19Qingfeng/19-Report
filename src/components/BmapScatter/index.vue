@@ -1,10 +1,16 @@
 <template>
-    <v-chart :options="chartOption" />
+    <div class="m_map_scatter">
+        <v-chart :options="chartOption" />
+    </div>
 </template>
 <style lang="scss">
-.echarts {
-  width: 100% !important;
-  height: 100% !important;
+.m_map_scatter {
+  height: 100%;
+  width: 100%;
+  .echarts {
+    width: 100% !important;
+    height: 100% !important;
+  }
 }
 </style>
 <script>

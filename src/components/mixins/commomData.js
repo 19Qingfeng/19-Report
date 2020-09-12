@@ -23,9 +23,14 @@ function wapperArray(o, k) {
     return o && o[k] ? o[k] : []
 }
 
-
+// 这个mixins和provide架构思想 在项目一定要学习思想
 export default {
     inject: ["getReportData", "getWordCloud", "getMapData"],
+    methods: {
+        formatPermillage(data) {
+            return format(data)
+        }
+    },
     computed: {
         reportData() {
             return this.getReportData()
@@ -99,6 +104,10 @@ export default {
         },
         userRank() {
             return wapperArray(this.reportData, 'userRank')
+        },
+        // 搜索量组件API
+        wordCloud() {
+            return this.getWordCloud()
         }
 
         // 未完 继续补充
