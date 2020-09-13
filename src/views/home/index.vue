@@ -11,7 +11,7 @@ import TopView from "../../components/TopView";
 import SalesView from "../../components/SalesView";
 import BottomView from "../../components/BottomView";
 import MapView from "../../components/MapView";
-import { wordCloudApi, screenData, screenMap } from "../../api";
+import { wordCloudApi, screenData, scatter } from "../../api";
 
 export default {
   name: "Home",
@@ -56,7 +56,7 @@ export default {
     screenData().then((res) => {
       this.reportData = res;
     });
-    screenMap().then((res) => {
+    scatter().then((res) => {
       this.mapdata = res;
     });
   },

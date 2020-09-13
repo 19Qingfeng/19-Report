@@ -127,6 +127,9 @@ export default {
         },
         category2() {
             return wapperObject(this.reportData, 'category.data2')
+        },
+        mapData() {
+            return this.getMapData()
         }
 
         // 未完 继续补充

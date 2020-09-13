@@ -4,7 +4,7 @@
             <el-card shadow="hover">
                 <template v-slot:header>
                     <div class="title-wapper">
-                        关键词搜索
+                        关键词搜索{{Math.random()}}
                     </div>
                 </template>
                 <template>
@@ -68,7 +68,7 @@
                         <div class="title">分类销售排行</div>
                         <div class="radio-wapper">
                             <el-radio-group
-                                v-model="radioSelect"
+                                v-model="renderOptions"
                                 size="mini"
                                 @onChange="changeRadioSelect"
                             >

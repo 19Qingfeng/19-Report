@@ -15,28 +15,36 @@
 </style>
 <script>
 import "echarts-liquidfill";
+import commomData from "@/components/mixins/commomData";
 export default {
   name: "LiquidFill",
-  data() {
-    function getColor(value) {
-      return value > 0 && value <= 0.5
-        ? "rgba(97,216,0,.7)"
-        : value > 0.5 && value <= 0.8
-        ? "rgba(204,178,26,.7)"
-        : value > 0.8
-        ? "rgba(241,47,28,.7)"
-        : "#c7c7cb";
-    }
-    return {
-      options: {
+  mixins: [commomData],
+  watch: {
+    userGrowthLastMonth(n) {
+      const data = (n / 1000).toFixed(2);
+      this.renderChart(data);
+    },
+  },
+  methods: {
+    renderChart(data) {
+      function getColor(value) {
+        return value > 0 && value <= 0.5
+          ? "rgba(97,216,0,.7)"
+          : value > 0.5 && value <= 0.8
+          ? "rgba(204,178,26,.7)"
+          : value > 0.8
+          ? "rgba(241,47,28,.7)"
+          : "#c7c7cb";
+      }
+      this.options = {
         series: [
           {
             type: "liquidFill",
-            data: [0.38],
+            data: [data],
             radius: "80%",
             // 波纹的震荡幅度
             amplitude: 8,
-            color: [getColor(0.38)],
+            color: [getColor(data)],
             backgroundStyle: {
               color: "#fff",
             },
@@ -64,12 +72,17 @@ export default {
                 fontWeight: "normal",
               },
               formatter: (v) => {
-                return v.value;
+                return `${v.value}%`;
               },
             },
           },
         ],
-      },
+      };
+    },
+  },
+  data() {
+    return {
+      options: null,
     };
   },
 };

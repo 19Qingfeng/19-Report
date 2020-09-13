@@ -29,7 +29,7 @@ export function wordCloudApi() {
     })
 }
 
-export function screenMap() {
+export function Map() {
     return request({
         method: "GET",
         url: "/screen/map",
