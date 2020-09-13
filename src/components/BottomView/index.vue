@@ -70,6 +70,7 @@
                             <el-radio-group
                                 v-model="radioSelect"
                                 size="mini"
+                                @onChange="changeRadioSelect"
                             >
                                 <el-radio-button label="商品"></el-radio-button>
                                 <el-radio-button label="品类"></el-radio-button>
@@ -124,8 +125,15 @@ export default {
         this.initChart(n);
       },
     },
+    category1(n) {
+      this.renderOptions();
+    },
   },
   methods: {
+    changeRadioSelect(value) {
+      this.radioSelect = value;
+      this.renderOptions();
+    },
     initChart(n) {
       const axis = n.map((i) => i.word);
       const firstData = n.map((i) => i.user);
@@ -166,44 +174,33 @@ export default {
       );
     },
     renderOptions() {
-      const mockData = [
-        {
-          name: "粉面粥店",
-          legendName: "粉面粥店",
-          value: 97,
-          percent: "15.40%",
-          itemStyle: {
-            color: "#8D7fec",
-          },
-        },
-        {
-          name: "简餐",
-          legendName: "简餐",
-          value: 97,
-          percent: "22.30%",
-          itemStyle: {
-            color: "#5085f2",
-          },
-        },
-        {
-          name: "汉堡披萨",
-          legendName: "汉堡披萨",
-          value: 92,
-          percent: "21.15%",
-          itemStyle: {
-            color: "#e7e702",
-          },
-        },
-        {
-          name: "粉面粥店2",
-          legendName: "粉面粥店2",
-          value: 97,
-          percent: "15.40%",
-          itemStyle: {
-            color: "green",
-          },
-        },
+      if (!this.category1.data1 || !this.category2.data1) return;
+      let index;
+      this.radioSelect === "商品" ? (index = 1) : (index = 2);
+      let colorList = [
+        "#8D7fec",
+        "#5085f2",
+        "#e7e702",
+        "green",
+        "blue",
+        "purple",
       ];
+      const data = this[`category${index}`].data1;
+      const axis = this[`category${index}`].axisX;
+      const total = data.reduce((a, b) => a + b, 0);
+      const chartData = [];
+      data.forEach((item, index) => {
+        const percent = ((item / total) * 100).toFixed(2);
+        chartData.push({
+          name: `${axis[index]} | ${percent}%`,
+          legendName: axis[index],
+          value: item,
+          percent,
+          itemStyle: {
+            color: colorList[index],
+          },
+        });
+      });
       const options = {
         legend: {
           // 需要注意的是legend属性需要在data中定义每个item的name
@@ -229,7 +226,7 @@ export default {
           },
           {
             text: "累计订单量",
-            subtext: "390",
+            subtext: total,
             left: "34.5%",
             top: "42.5%",
             textAlign: "center",
@@ -246,7 +243,7 @@ export default {
         series: [
           {
             type: "pie",
-            data: mockData,
+            data: chartData,
             // radius百分比的意思是取宽高中最小的
             // 百分比作为饼图的直径
             radius: ["45%", "60%"],

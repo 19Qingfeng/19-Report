@@ -14,6 +14,19 @@ function wapperMoney(o, k) {
     return o && o[k] ? `¥ ${format(o[k])}` : '¥ 0'
 }
 
+function wapperObject(o, k) {
+    if (o && k.includes('.')) {
+        const key = k.split('.')
+        key.forEach(i => {
+            o = o[i]
+        })
+        return o
+    } else {
+        return o && o[k] ? o[k] : {}
+    }
+
+}
+
 function format(v) {
     const reg = /\d{1,3}(?=(\d{3})+$)/g
     return `${v}`.replace(reg, '$&,')
@@ -108,6 +121,12 @@ export default {
         // 搜索量组件API
         wordCloud() {
             return this.getWordCloud()
+        },
+        category1() {
+            return wapperObject(this.reportData, 'category.data1')
+        },
+        category2() {
+            return wapperObject(this.reportData, 'category.data2')
         }
 
         // 未完 继续补充
