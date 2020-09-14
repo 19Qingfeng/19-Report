@@ -1,7 +1,7 @@
-import CommonCard from "../CommonCard"
+import CommonCard from '../CommonCard'
 
 export default {
-    components:{
-        CommonCard
-    }
+  components: {
+    CommonCard
+  }
 }

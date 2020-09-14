@@ -1,87 +1,87 @@
 <template>
-    <div class="sales-view">
-        <el-card :body-style="{'padding':'0 0 20px 0'}">
-            <template v-slot:header>
-                <div class="sales-view-top">
-                    <el-menu
-                        :default-active="activeIndex"
-                        mode="horizontal"
-                        @select="menuSelect"
-                        class="sales-view-menu"
-                    >
-                        <el-menu-item index="sales">销售额</el-menu-item>
-                        <el-menu-item index="visit">访问量</el-menu-item>
-                    </el-menu>
+  <div class="sales-view">
+    <el-card :body-style="{'padding':'0 0 20px 0'}">
+      <template v-slot:header>
+        <div class="sales-view-top">
+          <el-menu
+            :default-active="activeIndex"
+            mode="horizontal"
+            class="sales-view-menu"
+            @select="menuSelect"
+          >
+            <el-menu-item index="sales">销售额</el-menu-item>
+            <el-menu-item index="visit">访问量</el-menu-item>
+          </el-menu>
 
-                    <div class="menu-right">
-                        <el-radio-group
-                            v-model="currentToday"
-                            size="small"
-                        >
-                            <el-radio-button label="今日" />
-                            <el-radio-button label="本周" />
-                            <el-radio-button label="本月" />
-                            <el-radio-button label="今年" />
-                        </el-radio-group>
-                        <el-date-picker
-                            v-model="date"
-                            type="daterange"
-                            size="small"
-                            start-placeholder="开始时间"
-                            end-placeholder="结束时间"
-                            placeholder="date"
-                            range-separator="至"
-                            class="sales-view-date-picker"
-                        />
-                    </div>
+          <div class="menu-right">
+            <el-radio-group
+              v-model="currentToday"
+              size="small"
+            >
+              <el-radio-button label="今日" />
+              <el-radio-button label="本周" />
+              <el-radio-button label="本月" />
+              <el-radio-button label="今年" />
+            </el-radio-group>
+            <el-date-picker
+              v-model="date"
+              type="daterange"
+              size="small"
+              start-placeholder="开始时间"
+              end-placeholder="结束时间"
+              placeholder="date"
+              range-separator="至"
+              class="sales-view-date-picker"
+            />
+          </div>
 
-                </div>
-            </template>
-            <template>
-                <div class="sales-view-chart-wapper">
-                    <v-chart :options="chartOptions" />
-                    <div class="sales-view-list">
-                        <div class="sales-view-title">排行榜</div>
-                        <div :class="['item-wapper']">
-                            <div
-                                class="item-wapper-inner"
-                                v-for="(item,idx) in rankData"
-                                :key="idx"
-                            >
-                                <div :class="['item-number',idx < 3 ? 'item-number-hover' : '']">{{item.no}}</div>
-                                <div class="item-name">{{item.name}}</div>
-                                <div class="item-money">{{item.money}}</div>
-                            </div>
-                        </div>
+        </div>
+      </template>
+      <template>
+        <div class="sales-view-chart-wapper">
+          <v-chart :options="chartOptions" />
+          <div class="sales-view-list">
+            <div class="sales-view-title">排行榜</div>
+            <div :class="['item-wapper']">
+              <div
+                v-for="(item,idx) in rankData"
+                :key="idx"
+                class="item-wapper-inner"
+              >
+                <div :class="['item-number',idx < 3 ? 'item-number-hover' : '']">{{ item.no }}</div>
+                <div class="item-name">{{ item.name }}</div>
+                <div class="item-money">{{ item.money }}</div>
+              </div>
+            </div>
 
-                    </div>
-                </div>
-            </template>
-        </el-card>
-    </div>
+          </div>
+        </div>
+      </template>
+    </el-card>
+  </div>
 </template>
 <script>
-import CommonDataMixins from "@/views/home/mixins/commonData";
+import CommonDataMixins from '@/views/home/mixins/commonData'
 export default {
-  name: "SalesView",
+  name: 'SalesView',
   mixins: [CommonDataMixins],
   data() {
     return {
-      activeIndex: "sales",
-      currentToday: "今日",
+      activeIndex: 'sales',
+      currentToday: '今日',
       chartOptions: {},
-      date: null,
-    };
-  },
-  watch: {
-    orderFullYear(n) {
-      this.render(n, this.orderFullYearAxis, "年度销售额");
-    },
+      date: null
+    }
   },
   computed: {
     rankData() {
-      return this.activeIndex === "sales" ? this.orderRank : this.userRank;
-    },
+      return this.activeIndex === 'sales' ? this.orderRank : this.userRank
+    }
+  },
+  watch: {
+    orderFullYear(n) {
+      this.render(n, this.orderFullYearAxis, '年度销售额')
+    }
   },
   methods: {
     render(data, axis, title) {
@@ -92,70 +92,70 @@ export default {
           top: 20,
           textStyle: {
             fontSize: 12,
-            color: "#666",
-          },
+            color: '#666'
+          }
         },
         xAxis: {
-          type: "category",
+          type: 'category',
           // axisTick:false,
           axisTick: {
             // 类目轴有效果 x刻度线和类目轴对齐
             // 同时也会解决X轴开头显示的刻度
             alignWithLabel: true,
             lineStyle: {
-              color: "#999",
-            },
+              color: '#999'
+            }
           },
           axisLine: {
             lineStyle: {
-              color: "#999",
-            },
+              color: '#999'
+            }
           },
           axisLabel: {
-            color: "#333",
+            color: '#333'
           },
-          data: axis,
+          data: axis
         },
         grid: {
           top: 70,
           left: 60,
           right: 60,
-          bottom: 50,
+          bottom: 50
         },
         yAxis: {
           axisLine: {
-            show: false,
+            show: false
           },
           axisTick: {
-            show: false,
+            show: false
           },
           splitLine: {
             lineStyle: {
-              color: "#eee",
-              type: "dashed",
-            },
-          },
+              color: '#eee',
+              type: 'dashed'
+            }
+          }
         },
         series: [
           {
-            color: "#3398BD",
-            type: "bar",
-            barWidth: "35%",
-            data,
-          },
-        ],
-      };
-    },
-    menuSelect(index) {
-      this.activeIndex = index;
-      if (index === "sales") {
-        this.render(this.orderFullYear, this.orderFullYearAxis, "年度销售额");
-      } else {
-        this.render(this.userFullYear, this.userFillYearAxis, "年度用户访问量");
+            color: '#3398BD',
+            type: 'bar',
+            barWidth: '35%',
+            data
+          }
+        ]
       }
     },
-  },
-};
+    menuSelect(index) {
+      this.activeIndex = index
+      if (index === 'sales') {
+        this.render(this.orderFullYear, this.orderFullYearAxis, '年度销售额')
+      } else {
+        this.render(this.userFullYear, this.userFillYearAxis, '年度用户访问量')
+      }
+    }
+  }
+}
 </script>
 
 <style lang="scss">

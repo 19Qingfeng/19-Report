@@ -29,25 +29,11 @@ export default {
     MapView,
   },
   data() {
-    return {};
-  },
-  data() {
     return {
       reportData: null,
       wordCloud: null,
       mapdata: null,
     };
-  },
-  methods: {
-    getReportData() {
-      return this.reportData;
-    },
-    getWordCloud() {
-      return this.wordCloud;
-    },
-    getMapData() {
-      return this.mapdata;
-    },
   },
   created() {
     wordCloudApi().then((res) => {
@@ -59,6 +45,17 @@ export default {
     scatter().then((res) => {
       this.mapdata = res;
     });
+  },
+  methods: {
+    getReportData() {
+      return this.reportData;
+    },
+    getWordCloud() {
+      return this.wordCloud;
+    },
+    getMapData() {
+      return this.mapdata;
+    },
   },
 };
 </script>

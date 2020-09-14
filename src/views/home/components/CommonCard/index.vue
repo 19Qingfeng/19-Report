@@ -1,31 +1,33 @@
 <template>
-  <div>
-    <div class="title">{{title}}</div>
-    <div class="description">{{description}}</div>
-    <div class="chart">
-      <slot />
+    <div>
+        <div class="title">{{ title }}</div>
+        <div class="description">{{ description }}</div>
+        <div class="chart">
+            <slot />
+        </div>
+        <!-- 默认插槽 展示图表 -->
+        <div class="line" />
+        <div class="footer">
+            <slot name="footer" />
+        </div>
     </div>
-    <!-- 默认插槽 展示图表 -->
-    <div class="line" />
-    <div class="footer">
-      <slot name="footer" /> 
-    </div>
-  </div>
 </template>
 <script>
 export default {
   name: "CommonCard",
   props: {
     title: {
-      type: String
+      type: String,
+      default: "",
     },
     description: {
-      type: String
-    }
+      type: String,
+      default: "",
+    },
   },
   data() {
     return {};
-  }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -43,12 +45,12 @@ export default {
 .chart {
   height: 50px;
 }
-.line{
-  margin:10px 0;
-  border-top:1px solid #eee;
+.line {
+  margin: 10px 0;
+  border-top: 1px solid #eee;
 }
-.footer{
+.footer {
   font-size: 12px;
-  color:gray;
+  color: gray;
 }
 </style>

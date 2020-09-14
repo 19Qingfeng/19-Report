@@ -1,6 +1,6 @@
 <template>
     <div class="m_wordCloud">
-        <v-chart :options="chartOptions"></v-chart>
+        <v-chart :options="chartOptions" />
     </div>
 </template>
 <style lang="scss">
@@ -19,6 +19,11 @@ import commomData from "@/views/home/mixins/commonData";
 export default {
   name: "WordCloud",
   mixins: [commomData],
+  data() {
+    return {
+      chartOptions: null,
+    };
+  },
   watch: {
     wordCloud(n) {
       this.renderChart(n);
@@ -72,34 +77,6 @@ export default {
         ],
       };
     },
-  },
-  data() {
-    const data = [
-      { name: "数据可视化", value: 50 },
-      { name: "19-Qingfeng", value: 20 },
-      { name: "wanghaoyu", value: 70 },
-      { name: "webpack", value: 70 },
-      { name: "typescript", value: 67 },
-      { name: "vue-sourcecode", value: 73 },
-      { name: "react", value: 22 },
-      { name: "ecmascript6", value: 122 },
-      { name: "ecmascript7", value: 72 },
-      { name: "ecmascript8", value: 22 },
-      { name: "ecmascript9", value: 82 },
-      { name: "ecmascript10", value: 62 },
-      { name: "ecmascript11", value: 42 },
-      { name: "ecmascript12", value: 18 },
-      { name: "rollup", value: 68 },
-      { name: "java", value: 38 },
-      { name: "py", value: 48 },
-      { name: "go", value: 78 },
-      { name: "设计模式", value: 68 },
-      { name: "算法", value: 38 },
-      { name: "jest", value: 118 },
-    ];
-    return {
-      chartOptions: null,
-    };
   },
 };
 </script>

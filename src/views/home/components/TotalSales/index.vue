@@ -1,39 +1,39 @@
 <template>
-    <div>
-        <common-card
-            title="累计销售额"
-            :description="`${salesToday}`"
-        >
-            <div class="compare-wapper">
-                <div class="compare">
-                    <span>日同比</span>
-                    <span class="emphasis">{{salesGrowthLastDay}}</span>
-                    <div class="increase" />
-                </div>
-                <div class="compare">
-                    <span>月同比</span>
-                    <span class="emphasis">{{salesGrowthLastMonth}}</span>
-                    <div class="decrease" />
-                </div>
-            </div>
+  <div>
+    <common-card
+      title="累计销售额"
+      :description="`${salesToday}`"
+    >
+      <div class="compare-wapper">
+        <div class="compare">
+          <span>日同比</span>
+          <span class="emphasis">{{ salesGrowthLastDay }}</span>
+          <div class="increase" />
+        </div>
+        <div class="compare">
+          <span>月同比</span>
+          <span class="emphasis">{{ salesGrowthLastMonth }}</span>
+          <div class="decrease" />
+        </div>
+      </div>
 
-            <template v-slot:footer>
-                <span>昨日销售额</span>
-                <span class="emphasis">{{salesLastData}}</span>
-            </template>
-        </common-card>
-    </div>
+      <template v-slot:footer>
+        <span>昨日销售额</span>
+        <span class="emphasis">{{ salesLastData }}</span>
+      </template>
+    </common-card>
+  </div>
 </template>
 <script>
-import commoncardMixins from "@/views/home/mixins/commonCard";
-import commonDataMixins from "@/views/home/mixins/commonData";
+import commoncardMixins from '@/views/home/mixins/commonCard'
+import commonDataMixins from '@/views/home/mixins/commonData'
 export default {
-  name: "TotalSales",
+  name: 'TotalSales',
   mixins: [commoncardMixins, commonDataMixins],
   data() {
-    return {};
-  },
-};
+    return {}
+  }
+}
 </script>
 <style lang="scss" scoped>
 .compare-wapper {

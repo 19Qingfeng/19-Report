@@ -1,41 +1,41 @@
 <template>
-    <div class="map-view">
-        <div class="left">
-            <Bmap-scatter />
-        </div>
-        <div class="right">
-
-            <el-card shadow="hover">
-                <template v-slot:header>
-                    <div class="title">用户月同比增长</div>
-                    <div class="chart-wapper">
-                        <liquid-fill />
-                    </div>
-                </template>
-            </el-card>
-            <el-card shadow="hover">
-                <template v-slot:header>
-                    <div class="title">用户月同比增长</div>
-                    <div class="chart-wapper">
-                        <word-cloud />
-                    </div>
-                </template>
-            </el-card>
-
-        </div>
+  <div class="map-view">
+    <div class="left">
+      <Bmap-scatter />
     </div>
+    <div class="right">
+
+      <el-card shadow="hover">
+        <template v-slot:header>
+          <div class="title">用户月同比增长</div>
+          <div class="chart-wapper">
+            <liquid-fill />
+          </div>
+        </template>
+      </el-card>
+      <el-card shadow="hover">
+        <template v-slot:header>
+          <div class="title">用户月同比增长</div>
+          <div class="chart-wapper">
+            <word-cloud />
+          </div>
+        </template>
+      </el-card>
+
+    </div>
+  </div>
 </template>
 <script>
-import BmapScatter from "../BmapScatter";
-import liquidFill from "../liquidFill";
-import wordCloud from "../wordCloud";
+import BmapScatter from '../BmapScatter'
+import liquidFill from '../liquidFill'
+import wordCloud from '../wordCloud'
 export default {
   components: {
     BmapScatter,
     liquidFill,
-    wordCloud,
-  },
-};
+    wordCloud
+  }
+}
 </script>
 <style lang="scss" scoped>
 .map-view {
