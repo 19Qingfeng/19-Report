@@ -15,11 +15,13 @@ const service = axios.create({
   timeout: 5000 // request timeout
 })
 
+console.log(process.env.VUE_APP_BASE_API, 'process.env.VUE_APP_BASE_API')
+
 // request interceptor
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-
+    console.log(config, 'configggggggggggggg')
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
@@ -38,15 +40,15 @@ service.interceptors.request.use(
 // response interceptor
 service.interceptors.response.use(
   /**
-     * If you want to get http information such as headers or status
-     * Please return  response => response
-     */
+   * If you want to get http information such as headers or status
+   * Please return  response => response
+   */
 
   /**
-     * Determine the request status by custom code
-     * Here is just an example
-     * You can also judge the status by HTTP Status Code
-     */
+   * Determine the request status by custom code
+   * Here is just an example
+   * You can also judge the status by HTTP Status Code
+   */
   response => {
     const res = response.data
 
@@ -64,6 +66,9 @@ service.interceptors.response.use(
     }
   },
   error => {
+    console.log(service.baseURL, 'service.baseURL')
+    console.log(service, 'service.baseURL')
+
     console.log('err' + error) // for debug
     Message({
       message: error.message,
